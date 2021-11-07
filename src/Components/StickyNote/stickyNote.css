@@ -1,5 +1,6 @@
 .sticky-note{
   position: absolute;
+  z-index: 15;
   text-decoration:none;
   color:#000;
   background:#FFFD75;
