@@ -7,7 +7,8 @@ export interface DragItem {
 export interface StickyNoteObject {
     top: number;
     left: number;
-    content: string;
+    title?: string;
+    content?: string;
     color?: string;
 }
 export interface StickyNoteItem {

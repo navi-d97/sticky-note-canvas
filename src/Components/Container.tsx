@@ -1,28 +1,32 @@
-import { FC, useCallback, useState } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 import { useDrop, XYCoord } from 'react-dnd'
 import { ItemTypes } from '../ItemTypes'
 import { StickyNote } from './StickyNote'
-import update from 'immutability-helper'
 import { DragItem, StickyNoteItem } from '../interfaces'
+import { useDispatch, useSelector } from 'react-redux'
+import { getNotes, updateNote } from '../store/actions/stickyNotesAction'
 
 
 export const Container: FC = () => {
-  const [boxes, setBoxes] = useState<StickyNoteItem>({
-    'a': { top: 20, left: 80, content: 'Drag me around' },
-    'b': { top: 198, left: 245, content: 'Drag me too', color: 'yellow' },
-  })
+
+  const dispatch = useDispatch()
+  const notesData = useSelector((state: any) => state.notesData)
+  const {notes } = notesData;
+  useEffect(() => {
+      dispatch(getNotes())
+  }, [dispatch])
+
+  useEffect(()=>{
+   setBoxes(notes); 
+  },[notes]);
+
+  const [boxes, setBoxes] = useState<StickyNoteItem>();
 
   const moveBox = useCallback(
     (id: string, left: number, top: number) => {
-      setBoxes(
-        update(boxes, {
-          [id]: {
-            $merge: { left, top },
-          },
-        }),
-      )
+      dispatch(updateNote(id, {left, top}))
     },
-    [boxes, setBoxes],
+    [dispatch],
   )
 
   const [, drop] = useDrop(
@@ -41,7 +45,7 @@ export const Container: FC = () => {
 
   return (
     <div ref={drop} className="drag-drop-container">
-      {Object.keys(boxes).map((key) => {
+      {boxes && Object.keys(boxes).map((key) => {
         return (
           <StickyNote
             key={key}

@@ -1,9 +1,7 @@
 .App {
-  background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
 }
 .drag-drop-container {
-  border: '1px solid black';
   position: 'relative';
   min-height: 100vh;
 }
