@@ -4,19 +4,15 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { useDispatch } from 'react-redux';
 import './App.css';
 import { Container } from './Components/Container';
+import ToolPanel from './Components/ToolPanel';
 import { addNote } from './store/actions/stickyNotesAction';
 
 
 function Canvas() {
-  const dispatch = useDispatch()
-  const onAddItem = useCallback(() => {
-    dispatch(addNote({top: 100, left:400}))
-  }, [dispatch])
+
   return (
     <div className="App">
-      <button onClick={onAddItem }>
-        Add new
-      </button>
+      <ToolPanel />
       <DndProvider backend={HTML5Backend}>
         <div>
           <Container />

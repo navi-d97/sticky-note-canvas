@@ -1,4 +1,4 @@
-import {GET_NOTES, UPDATE_NOTE, DELETE_NOTE, ADD_NOTE, GET_NOTES_ERROR} from '../types'
+import {GET_NOTES, UPDATE_NOTE, DELETE_NOTE, ADD_NOTE, GET_NOTES_ERROR, CLEAR_ALL} from '../types'
 import axios from 'axios'
 import { StickyNoteObject } from '../../interfaces';
 
@@ -38,5 +38,11 @@ export const deleteNote = (id:string) => async (dispatch: (arg0: { type: string;
     dispatch( {
         type: DELETE_NOTE,
         payload: id
+    })
+}
+
+export const clearAll = () => async (dispatch: (arg0: { type: string; }) => void) => {
+    dispatch( {
+        type: CLEAR_ALL,
     })
 }

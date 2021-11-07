@@ -1,5 +1,5 @@
 import { StickyNoteItem, StickyNoteObject } from '../../interfaces';
-import { ADD_NOTE, DELETE_NOTE, GET_NOTES, GET_NOTES_ERROR, UPDATE_NOTE } from '../types'
+import { ADD_NOTE, CLEAR_ALL, DELETE_NOTE, GET_NOTES, GET_NOTES_ERROR, UPDATE_NOTE } from '../types'
 
 const initialState = {
     notes: {},
@@ -56,6 +56,11 @@ export default function moviesReducer(state = initialState, action: { type: stri
             return {
                 ...state,
                 notes: deleteNote(state.notes, action.payload),
+            }
+        case CLEAR_ALL:
+            return {
+                ...state,
+                notes: {},
             }
         default: return state
     }
