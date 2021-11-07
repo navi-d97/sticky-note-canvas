@@ -28,6 +28,7 @@
   cursor: pointer;
   width: 36px;
   height: 36px;
+  z-index: 10;
 }
 
 .close-btn {
