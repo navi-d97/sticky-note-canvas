@@ -1,24 +1,24 @@
-FROM node:14.15.5 as Builder
 
-# create WORKDIR
+# Multi-stage
+# 1) Node image for building frontend assets
+# 2) nginx stage to serve frontend assets
 
+# Name the node stage "builder"
+FROM node:14.15.5 AS builder
+# Set working directory
 WORKDIR /app
-
+# Copy all files from current directory to working dir in image
 COPY . .
+# install node modules and build assets
+RUN yarn install && yarn build
 
-# install all the dependencies
-RUN yarn install && yarn build && rm -rf node_modules
-
-# building the application
-
-
-# getting the server for hosting
-
+# nginx state for serving content
 FROM nginx:alpine
-
-# copy configuration file for nginx
-COPY ./nginx_config/default.conf /etc/nginx/conf.d/default.conf
-
-# passing the build to nginx
-COPY --from=Builder /build/ /usr/share/nginx/html/
-
+# Set working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
+# Remove default nginx static assets
+RUN rm -rf ./*
+# Copy static assets from builder stage
+COPY --from=builder /app/build .
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
