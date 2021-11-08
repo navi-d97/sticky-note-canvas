@@ -17,3 +17,11 @@ http://ec2-50-17-162-1.compute-1.amazonaws.com/
 ## api repository
 
 https://github.com/navi-d97/sticky-note-api
+
+## tech-stack
+-> React - (for front-end app)  
+-> Node, Express - (for backend)  
+-> socket.io - (for realtime update)  
+-> mongodb Atlas - (for DB storage)  
+-> aws EC2 - for hosting server and front-end app  
+-> nginx - for hosting static front-end  
