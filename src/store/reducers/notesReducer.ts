@@ -1,4 +1,4 @@
-import { StickyNoteItem, StickyNoteObject } from '../../interfaces';
+import { StickyNoteItem } from '../../interfaces';
 import { ADD_NOTE, CLEAR_ALL, DELETE_NOTE, GET_NOTES, GET_NOTES_ERROR, UPDATE_NOTE } from '../types'
 
 const initialState = {
@@ -6,10 +6,10 @@ const initialState = {
     loading: true
 }
 
-const addNewNote = (allNotes: StickyNoteItem, newNote: StickyNoteObject) => {
-    const id = new Date().toTimeString();
+const addNewNote = (allNotes: StickyNoteItem, data: any) => {
+    const { id, newData } = data;
     const updatedNotes = { ...allNotes };
-    updatedNotes[id] = newNote;
+    updatedNotes[id] = newData;
     return updatedNotes;
 }
 
