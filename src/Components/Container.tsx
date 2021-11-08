@@ -4,7 +4,7 @@ import { ItemTypes } from '../ItemTypes'
 import { StickyNote } from './StickyNote'
 import { DragItem, StickyNoteItem } from '../interfaces'
 import { useDispatch, useSelector } from 'react-redux'
-import { getNotes, updateNote } from '../store/actions/stickyNotesAction'
+import { updateNote } from '../store/actions/stickyNotesAction'
 
 
 export const Container: FC = () => {
@@ -12,9 +12,6 @@ export const Container: FC = () => {
   const dispatch = useDispatch()
   const notesData = useSelector((state: any) => state.notesData)
   const {notes } = notesData;
-  useEffect(() => {
-      dispatch(getNotes())
-  }, [dispatch])
 
   useEffect(()=>{
    setBoxes(notes); 

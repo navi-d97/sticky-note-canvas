@@ -1,9 +1,10 @@
 import { StickyNoteItem } from '../../interfaces';
-import { ADD_NOTE, CLEAR_ALL, DELETE_NOTE, GET_NOTES, GET_NOTES_ERROR, UPDATE_NOTE } from '../types'
+import { ADD_NOTE, CLEAR_ALL, DELETE_NOTE, GET_NOTES, GET_NOTES_ERROR, UPDATE_NOTE, UPDATE_USER } from '../types'
 
 const initialState = {
     notes: {},
-    loading: true
+    loading: true,
+    userId: null,
 }
 
 const addNewNote = (allNotes: StickyNoteItem, data: any) => {
@@ -33,12 +34,13 @@ export default function moviesReducer(state = initialState, action: { type: stri
 
         case GET_NOTES:
             return {
+                ...state,
                 notes: action.payload,
                 loading: false
-
             }
         case GET_NOTES_ERROR:
             return {
+                ...state,
                 loading: false,
                 error: action.payload
             }
@@ -62,6 +64,12 @@ export default function moviesReducer(state = initialState, action: { type: stri
                 ...state,
                 notes: {},
             }
+        case UPDATE_USER: {
+            return {
+                ...state,
+                userId: action.payload,
+            }
+        }
         default: return state
     }
 
