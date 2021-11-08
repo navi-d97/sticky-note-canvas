@@ -1,13 +1,13 @@
 import {GET_NOTES, UPDATE_NOTE, DELETE_NOTE, ADD_NOTE, GET_NOTES_ERROR, CLEAR_ALL, UPDATE_USER} from '../types'
 import axios from 'axios';
 import { StickyNoteObject } from '../../interfaces';
-import { socket } from '../../Common/constants';
+import { BASE_URL, socket } from '../../Common/constants';
 import store from '../store';
 
 export const getNotes = () => async (dispatch: (arg0: { type: string; payload: any }) => void) => {
     const { userId } = store.getState().notesData;
     try{
-        const res:any = await axios.get(`http://localhost:8000/stickyNotes?userId=${userId}`);
+        const res:any = await axios.get(`${BASE_URL}/stickyNotes?userId=${userId}`);
         dispatch( {
             type: GET_NOTES,
             payload: res.data,
